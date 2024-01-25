@@ -203,6 +203,9 @@ namespace GitTfs.Commands
             if (gitRemote == null)
             {
                 childBranchesToInit = GetChildBranchesToInit(defaultRemote);
+
+                childBranchesToInit = childBranchesToInit.Where(c=>Workarounds.IsWhitelisted(c.TfsRepositoryPath)).ToList();
+
             }
             else
             {

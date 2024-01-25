@@ -651,8 +651,9 @@ namespace GitTfs.Core
                     }
                 }
                 var filterRegex = Repository.GetConfig(GitTfsConstants.IgnoreBranchesRegex);
-                if (mergeChangeset && tfsBranch != null && !string.IsNullOrEmpty(filterRegex)
-                    && Regex.IsMatch(tfsBranch.Path, filterRegex, RegexOptions.IgnoreCase))
+                if (mergeChangeset && tfsBranch != null && 
+                    Workarounds.IsBlacklisted((!string.IsNullOrEmpty(filterRegex) && Regex.IsMatch(tfsBranch.Path, filterRegex, RegexOptions.IgnoreCase)),
+                    tfsBranch.Path))
                 {
                     Trace.TraceInformation("warning: skip filtered branch for path " + tfsBranch.Path + " (regex:" + filterRegex + ")");
                     tfsRemote = null;

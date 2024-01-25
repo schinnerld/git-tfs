@@ -119,7 +119,7 @@ namespace GitTfs.Commands
 
                 if (retVal == 0)
                 {
-                    _fetch.Run(_fetch.BranchStrategy == BranchStrategy.All);
+                    _fetch.Run(Workarounds.StopOnFailMergeCommit(_fetch.BranchStrategy == BranchStrategy.All));
                     _globals.Repository.GarbageCollect();
                 }
 

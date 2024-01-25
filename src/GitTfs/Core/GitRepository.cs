@@ -668,8 +668,10 @@ namespace GitTfs.Core
                     }
                 }
             }
+
             if (remoteRef == null && commit == null)
-                cacheIsFull = true; // repository fully scanned
+                cacheIsFull = true; // repository fully scanned TODO: this might be a bug
+
             Trace.WriteLine((commit == null) ? " => Commit " + changesetId + " not found!" : " => Commit " + changesetId + " found! hash: " + commit.Sha);
             return commit;
         }
